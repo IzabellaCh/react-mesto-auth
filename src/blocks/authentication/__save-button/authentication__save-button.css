@@ -1,0 +1,12 @@
+.authentication__save-button {
+  margin: 186px 0 0;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+@media screen and (max-width: 690px) {
+  .authentication__save-button {
+    margin: 143px 0 0;
+  }
+}

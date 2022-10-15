@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import ProtectedRoute from './ProtectedRoute';
+import Register from './Register.js';
+import Login from './Login.js';
 import PopupWithForm from './PopupWithForm.js';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -149,12 +151,12 @@ function App() {
             onCardDelete={handleCardDelete}
             cards={cards}
           />
-        </Route>  
-        <Route path="/sing-up">
-
         </Route>
-        <Route path="/sing-in">
-
+        <Route path="/sign-up">
+          <Register />
+        </Route>
+        <Route path="/sign-in">
+          <Login />
         </Route>
       </Switch>
       <EditAvatarPopup isOpen={isEditAvatarOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />

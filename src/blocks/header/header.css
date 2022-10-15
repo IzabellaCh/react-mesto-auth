@@ -4,7 +4,7 @@
   width: calc(100% - 2*150px);
   min-height: 117px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1.5px solid #545454;
   opacity: 0.7;
