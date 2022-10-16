@@ -9,15 +9,20 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup.js';
+import InfoTooltip from './InfoTooltip';
 import Footer from './Footer';
 import { api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import { Route, Switch } from 'react-router-dom';
+import success from '../images/success.svg';
+import fail from '../images/fail.svg';
 
 function App() {
   const [isEditAvatarOpen, setIsEditAvatarOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [isFailOpen, setIsFailOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrenUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -38,11 +43,21 @@ function App() {
     setSelectedCard(cardInfo);
   }
 
+  function handleOpenSuccess() {
+    setIsSuccessOpen(true);
+  }
+
+  function handleOpenFail() {
+    setIsFailOpen(true);
+  }
+
   function closeAllPopups() {
     setIsEditAvatarOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
+    setIsSuccessOpen(false);
+    setIsFailOpen(false);
   }
 
   function handleUpdateUser(newInfo){
@@ -169,6 +184,20 @@ function App() {
       <PopupWithForm
         name="delete-card"
         title="Вы уверены?"
+      />
+      <InfoTooltip
+        name="success"
+        title="Вы успешно зарегистрировались!"
+        image={success}
+        isOpen={isSuccessOpen}
+        onClose={closeAllPopups}
+      />
+      <InfoTooltip
+        name="fail"
+        title="Что-то пошло не так! Попробуйте ещё раз."
+        image={fail}
+        isOpen={isFailOpen}
+        onClose={closeAllPopups}
       />
     </CurrentUserContext.Provider>
     <Footer />

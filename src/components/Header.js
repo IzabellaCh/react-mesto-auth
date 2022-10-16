@@ -4,7 +4,7 @@ import logo from '../images/logo.svg';
 
 function Header() {
   // вместо будущего стейта
-  const loggedIn = true;
+  const loggedIn = false;
   const [openHeaderContainer, setOpenHeaderContainer] = useState(false);
   
   function handleOpenContainer() {
@@ -16,11 +16,6 @@ function Header() {
   }
   
   return (
-    <>
-    {/* <div className={`header__container_type_hidden ${openHeaderContainer ? 'header__container_type_open' : ''}`}>
-          <p className="header__email">Здесь-будет@email</p>
-          <NavLink to="/sign-in" className="header__link header__link_type_gate">Выйти</NavLink>
-    </div> */}
   <header className="header">
     {loggedIn && (
       <div className={`header__container_type_hidden ${openHeaderContainer ? 'header__container_type_open' : ''}`}>
@@ -28,10 +23,6 @@ function Header() {
         <NavLink to="/sign-in" className="header__link header__link_type_gate">Выйти</NavLink>
       </div>
     )}
-    {/* <div className={`header__container_type_hidden ${openHeaderContainer ? 'header__container_type_open' : ''}`}>
-      <p className="header__email">Здесь-будет@email</p>
-      <NavLink to="/sign-in" className="header__link header__link_type_gate">Выйти</NavLink>
-    </div> */}
     <div className="header__visible-part">
       <img className="header__logo" src={logo} alt="Логотип." />
       {!loggedIn && (
@@ -56,7 +47,6 @@ function Header() {
       )}
     </div>
   </header>
-    </>
   )
 }
 
