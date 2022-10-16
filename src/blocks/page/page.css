@@ -13,4 +13,5 @@
   text-rendering: optimizeLegibility;
   background-color: #000000;
   position: relative;
+  overflow: hidden;
 }

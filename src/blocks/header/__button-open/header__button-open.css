@@ -1,0 +1,16 @@
+.header__button-open {
+  margin: 0 27px 0 0;
+  padding: 12px 0 0;
+  width: 24px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4.5px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 690px) {
+  .header__button-open {
+    display: none;
+  }
+}
