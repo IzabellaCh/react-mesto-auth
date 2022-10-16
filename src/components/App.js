@@ -27,6 +27,8 @@ function App() {
   const [currentUser, setCurrenUser] = useState({});
   const [cards, setCards] = useState([]);
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
   function handleEditAvatarClick() {
     setIsEditAvatarOpen(true);
   };
@@ -141,12 +143,12 @@ function App() {
 
   return (
   <div className="page">
-    <Header />
+    <Header loggedIn={loggedIn} />
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
-        {/* <ProtectedRoute
-          path="/"
-          // loggedIn
+        <ProtectedRoute
+          exact path="/"
+          loggedIn={loggedIn}
           component={Main}
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
@@ -155,8 +157,8 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
           cards={cards}
-        /> */}
-        <Route exact path="/">
+        />
+        {/* <Route exact path="/">
           <Main
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
@@ -166,7 +168,7 @@ function App() {
             onCardDelete={handleCardDelete}
             cards={cards}
           />
-        </Route>
+        </Route> */}
         <Route path="/sign-up">
           <Register />
         </Route>

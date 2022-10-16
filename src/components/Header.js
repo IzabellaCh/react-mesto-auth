@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../images/logo.svg';
 
-function Header() {
+function Header({ loggedIn }) {
   // вместо будущего стейта
-  const loggedIn = true;
+  // const loggedIn = false;
   const [openHeaderContainer, setOpenHeaderContainer] = useState(false);
   
   function handleOpenContainer() {
