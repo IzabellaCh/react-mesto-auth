@@ -6,7 +6,7 @@ function Card({onCardClick, info, onCardLike, onCardDelete}) {
   const isOwn = info.owner._id === currentUser._id;
 
   const cardDeleteButtonName = (
-    `element__trash-button button ${isOwn ? '' : 'element__trash-button_type_hidden'}`
+    `element__trash-button button-link-opacity ${isOwn ? '' : 'element__trash-button_type_hidden'}`
   );
   const isLiked = info.likes.some(i => i._id === currentUser._id);
   const cardLikeButtonName = (

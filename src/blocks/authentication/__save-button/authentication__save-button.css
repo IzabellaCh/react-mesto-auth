@@ -10,3 +10,7 @@
     margin: 143px 0 0;
   }
 }
+
+.authentication__save-button:hover {
+  opacity: 0.85;
+}

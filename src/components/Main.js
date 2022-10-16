@@ -13,11 +13,11 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onC
         <div className="profile__avatar-overlay" onClick={onEditAvatar}></div>
         <div className="profile__info">
           <h1 className="profile__name">{currentUser.name}</h1>
-          <button className="profile__edit-button button" onClick={onEditProfile}></button>
+          <button className="profile__edit-button button-link-opacity" onClick={onEditProfile}></button>
           <p className="profile__subtitle">{currentUser.about}</p>
         </div>
       </div>
-      <button className="profile__add-button button" onClick={onAddPlace}></button>
+      <button className="profile__add-button button-link-opacity" onClick={onAddPlace}></button>
     </section>
     <section className="elements" aria-label="Фото">
       <div className="elements__list">

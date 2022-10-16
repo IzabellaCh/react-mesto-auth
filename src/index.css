@@ -6,8 +6,8 @@
 /*body*/
 @import url(./blocks/body/body.css);
 
-/*button*/
-@import url(./blocks/button/button.css);
+/*button-link-opacity*/
+@import url(./blocks/button-link-opacity/button-link-opacity.css);
 
 /* save-botton */
 @import url(./blocks/save-button/save-button.css);
