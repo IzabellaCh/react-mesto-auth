@@ -50,7 +50,7 @@
 @media screen and (max-width: 690px) {
   .header__container_type_hidden {
     margin: 0;
-    padding: 40px 0 40px;
+    padding: 42px 0 42px;
     width: 100%;
     flex-direction: column;
     justify-content: space-between;

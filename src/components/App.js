@@ -13,9 +13,10 @@ import InfoTooltip from './InfoTooltip';
 import Footer from './Footer';
 import { api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory, withRouter } from 'react-router-dom';
 import success from '../images/success.svg';
 import fail from '../images/fail.svg';
+import { authorisation } from '../utils/authorisation';
 
 function App() {
   const [isEditAvatarOpen, setIsEditAvatarOpen] = useState(false);
@@ -26,8 +27,9 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrenUser] = useState({});
   const [cards, setCards] = useState([]);
-
+  const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
 
   function handleEditAvatarClick() {
     setIsEditAvatarOpen(true);
@@ -123,6 +125,31 @@ function App() {
       })
   }
 
+  function handleLogin() {
+    setLoggedIn(true);
+  }
+
+  function handleComeOut() {
+    setLoggedIn(false);
+  }
+
+  function checkToken() {
+    if(localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      authorisation.checkToken(token)
+        .then((res) => {
+          if(res) {
+            handleLogin();
+            history.push('/');
+            setEmail(res.data.email);
+          }
+        })
+        .catch((err) => {
+          alert(`Ошибка при проверке токена: ${err}`)
+        })
+    }
+  }
+
   useEffect(() => {
     api.getInitialCards()
       .then((data) => {
@@ -139,11 +166,18 @@ function App() {
       .catch((err) => {
         alert(`Ошибка при загрузке информации профиля: ${err}`);
       });
+    
+      checkToken();
   }, [])
+
 
   return (
   <div className="page">
-    <Header loggedIn={loggedIn} />
+    <Header 
+      loggedIn={loggedIn}
+      handleComeOut={handleComeOut}
+      email={email}
+    />
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
         <ProtectedRoute
@@ -158,22 +192,11 @@ function App() {
           onCardDelete={handleCardDelete}
           cards={cards}
         />
-        {/* <Route exact path="/">
-          <Main
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-            cards={cards}
-          />
-        </Route> */}
         <Route path="/sign-up">
-          <Register />
+          <Register openSuccess={handleOpenSuccess} openFail={handleOpenFail} />
         </Route>
         <Route path="/sign-in">
-          <Login />
+          <Login handleLogin={handleLogin} setEmail={setEmail} />
         </Route>
       </Switch>
       <EditAvatarPopup isOpen={isEditAvatarOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
@@ -207,4 +230,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

@@ -1,22 +1,39 @@
 import React, { useState } from "react";
+import { withRouter, useHistory } from 'react-router-dom';
 import AuthenticationWithForm from "./AuthenticationWithForm";
+import { authorisation } from '../utils/authorisation';
 
-function Login() {
+function Login({ handleLogin, setEmail }) {
   const [saveButton, setSaveButton] = useState('Войти');
+  const history = useHistory();
   
   function handleClick() {
     setSaveButton('Подождите...');
     setTimeout(setSaveButton, 1500, 'Войти');
   }
 
+  function handleSubmit(event, email, password) {
+    event.preventDefault();
+    authorisation.login(email, password)
+      .then((data) => {
+        localStorage.setItem('token', data.token);
+        setEmail(email);
+        handleLogin();
+        history.push('/');
+      })
+      .catch((err) => {
+        console.log(`Ошибка при авторизации: ${err}`);
+    })
+  }
+
   return (
     <section className="authentication" aria-label="Вход в личный кабинет">
       <div className="authentication__container">
         <h2 className='authentication__heading'>Вход</h2>
-        <AuthenticationWithForm onClick={handleClick} saveButton={saveButton} />
+        <AuthenticationWithForm handleSubmit={handleSubmit} onClick={handleClick} saveButton={saveButton} />
       </div>
     </section>
   )
 }
 
-export default Login;
+export default withRouter(Login);

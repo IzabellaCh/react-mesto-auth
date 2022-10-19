@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, useHistory } from 'react-router-dom';
 import AuthenticationWithForm from './AuthenticationWithForm';
+import { authorisation } from '../utils/authorisation';
 
-function Register() {
+
+function Register({ openSuccess, openFail }) {
   const [saveButton, setSaveButton] = useState('Зарегистрироваться');
-  
+  const history = useHistory();
+
+  function handleSubmit(event, email, password) {
+    event.preventDefault();
+    authorisation.register(email, password)
+    .then((res) => {
+      console.log(res);
+      if (res) {
+        openSuccess();
+        history.push('/sign-in');
+      };
+    })
+    .catch((err) => {
+      openFail();
+      console.log(`Ошибка при регистрации: ${err}`);
+    })
+  }
+
   function handleClick() {
     setSaveButton('Регистрация...');
     setTimeout(setSaveButton, 1500, 'Зарегистрироваться')
@@ -13,10 +32,10 @@ function Register() {
   return (
     <section className="authentication" aria-label="Регистрация">
       <h2 className='authentication__heading'>Регистрация</h2>
-      <AuthenticationWithForm onClick={handleClick} saveButton={saveButton} />
+      <AuthenticationWithForm handleSubmit={handleSubmit} onClick={handleClick} saveButton={saveButton} />
       <p className='authentication__subtitle'>Уже зарегистрированы? <Link to="/sign-in" className="authentication__subtitle authentication__subtitle_type_link button-link-opacity">Войти</Link></p>
     </section>
   )
 }
 
-export default Register;
+export default withRouter(Register);

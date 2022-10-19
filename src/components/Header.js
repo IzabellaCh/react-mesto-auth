@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, withRouter } from 'react-router-dom';
 import logo from '../images/logo.svg';
 
-function Header({ loggedIn }) {
-  // вместо будущего стейта
-  // const loggedIn = false;
+function Header({ loggedIn, handleComeOut, email }) {
   const [openHeaderContainer, setOpenHeaderContainer] = useState(false);
-  
+  const history = useHistory();
+
   function handleOpenContainer() {
     setOpenHeaderContainer(true);
   }
@@ -14,13 +13,19 @@ function Header({ loggedIn }) {
   function handleHideContainer() {
     setOpenHeaderContainer(false);
   }
+
+  function onSignOut() {
+    localStorage.removeItem('token');
+    handleComeOut();
+    history.push('/sign-in');
+  }
   
   return (
   <header className="header">
     {loggedIn && (
       <div className={`header__container_type_hidden ${openHeaderContainer ? 'header__container_type_open' : ''}`}>
-        <p className="header__email">Здесь-будет@email</p>
-        <NavLink to="/sign-in" className="header__link header__link_type_gate button-link-opacity">Выйти</NavLink>
+        <p className="header__email">{email}</p>
+        <NavLink onClick={onSignOut} to="/sign-in" className="header__link header__link_type_gate button-link-opacity">Выйти</NavLink>
       </div>
     )}
     <div className="header__visible-part">
@@ -34,8 +39,8 @@ function Header({ loggedIn }) {
       {loggedIn && (
         <>
         <div className="header__container">
-          <p className="header__email">Здесь-будет@email</p>
-          <NavLink to="/sign-in" className="header__link header__link_type_gate button-link-opacity">Выйти</NavLink>
+          <p className="header__email">{email}</p>
+          <NavLink onClick={onSignOut} to="/sign-in" className="header__link header__link_type_gate button-link-opacity">Выйти</NavLink>
         </div>
         <div onClick={handleOpenContainer} className={`header__button-open button-link-opacity ${openHeaderContainer ? 'header__button-open_type_hidden' : ''}`}>
           <div className="header__line"></div>
@@ -50,4 +55,4 @@ function Header({ loggedIn }) {
   )
 }
 
-export default Header;
+export default withRouter(Header);
