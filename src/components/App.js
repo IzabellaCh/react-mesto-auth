@@ -11,12 +11,12 @@ import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup.js';
 import InfoTooltip from './InfoTooltip';
 import Footer from './Footer';
-import { api } from '../utils/Api';
+import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import { Route, Switch, useHistory, withRouter } from 'react-router-dom';
 import success from '../images/success.svg';
 import fail from '../images/fail.svg';
-import { authorisation } from '../utils/authorisation';
+import { authorization } from '../utils/authorization';
 
 function App() {
   const [isEditAvatarOpen, setIsEditAvatarOpen] = useState(false);
@@ -136,7 +136,7 @@ function App() {
   function checkToken() {
     if(localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
-      authorisation.checkToken(token)
+      authorization.checkToken(token)
         .then((res) => {
           if(res) {
             handleLogin();

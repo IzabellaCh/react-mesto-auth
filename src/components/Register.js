@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, withRouter, useHistory } from 'react-router-dom';
 import AuthenticationWithForm from './AuthenticationWithForm';
-import { authorisation } from '../utils/authorisation';
+import { authorization } from '../utils/authorization';
 
 
 function Register({ openSuccess, openFail }) {
@@ -10,7 +10,7 @@ function Register({ openSuccess, openFail }) {
 
   function handleSubmit(event, email, password) {
     event.preventDefault();
-    authorisation.register(email, password)
+    authorization.register(email, password)
     .then((res) => {
       console.log(res);
       if (res) {

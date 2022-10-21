@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withRouter, useHistory } from 'react-router-dom';
 import AuthenticationWithForm from "./AuthenticationWithForm";
-import { authorisation } from '../utils/authorisation';
+import { authorization } from '../utils/authorization';
 
 function Login({ handleLogin, setEmail }) {
   const [saveButton, setSaveButton] = useState('Войти');
@@ -14,7 +14,7 @@ function Login({ handleLogin, setEmail }) {
 
   function handleSubmit(event, email, password) {
     event.preventDefault();
-    authorisation.login(email, password)
+    authorization.login(email, password)
       .then((data) => {
         localStorage.setItem('token', data.token);
         setEmail(email);

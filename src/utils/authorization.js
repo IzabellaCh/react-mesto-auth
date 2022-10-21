@@ -1,6 +1,6 @@
 const baseUrl = 'https://auth.nomoreparties.co';
 
-class Authorisation {
+class Authorization {
   constructor(data) {
     this._baseUrl = data.baseUrl;
   }
@@ -52,6 +52,6 @@ class Authorisation {
   }
 }
 
-export const authorisation = new Authorisation({
+export const authorization = new Authorization({
   baseUrl: 'https://auth.nomoreparties.co',
 });

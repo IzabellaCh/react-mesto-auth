@@ -83,27 +83,6 @@ class Api {
     }
   }
 
-  // Старый код отдельных запросов для постановки и удаления лайка
-  // addLike(cardInfo) {
-  //   return fetch(`${this._baseUrl}/cards/${cardInfo}/likes`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       authorization: this._headers.authorization
-  //     }
-  //   })
-  //   .then(this._checkResponse)
-  // }
-
-  // deleteLike(cardInfo) {
-  //   return fetch(`${this._baseUrl}/cards/${cardInfo}/likes`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       authorization: this._headers.authorization
-  //     }
-  //   })
-  //   .then(this._checkResponse)
-  // }
-
   changeAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
