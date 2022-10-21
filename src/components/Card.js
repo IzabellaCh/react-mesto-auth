@@ -27,7 +27,12 @@ function Card({onCardClick, info, onCardLike, onCardDelete}) {
   
   return (
     <div className="element">
-      <img className="element__image" alt={info.name} src={info.link} onClick={handleClick} />
+      <img
+        className="element__image"
+        alt={info.name}
+        src={info.link}
+        onClick={handleClick}
+      />
       <div className="element__description">
         <h2 className="element__title">{info.name}</h2>
         <div className="element__like-container">

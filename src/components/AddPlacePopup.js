@@ -57,9 +57,29 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       onSubmit={handleSubmit}
       isValid={isValid}
     >
-      <input type="text" onChange={handleChange} value={values.placename} id="placename-input" name="placename" className={`popup__field popup__field_type_place-name ${(errors.placename?.length > 1) ? 'popup__field_type_error' : ''}`} placeholder="Название" minLength="2" maxLength="30" required />
+      <input
+        type="text"
+        onChange={handleChange}
+        value={values.placename}
+        id="placename-input"
+        name="placename"
+        className={`popup__field popup__field_type_place-name ${(errors.placename?.length > 1) ? 'popup__field_type_error' : ''}`}
+        placeholder="Название"
+        minLength="2"
+        maxLength="30"
+        required 
+      />
       <span className={`popup__field-error placename-input-error ${(errors.placename?.length > 1) ? 'popup__field-error_active' : ''}`}>{errors.placename}</span>
-      <input type="url" onChange={handleChange} value={values.link} id="url-input" name="link" className={`popup__field popup__field_type_link-img ${(errors.link?.length > 1) ? 'popup__field_type_error' : ''}`} placeholder="Ссылка на картинку" required />
+      <input
+        type="url"
+        onChange={handleChange}
+        value={values.link}
+        id="url-input"
+        name="link"
+        className={`popup__field popup__field_type_link-img ${(errors.link?.length > 1) ? 'popup__field_type_error' : ''}`}
+        placeholder="Ссылка на картинку"
+        required
+      />
       <span className={`popup__field-error url-input-error ${(errors.link?.length > 1) ? 'popup__field-error_active' : ''}`}>{errors.link}</span>
     </PopupWithForm>
   )

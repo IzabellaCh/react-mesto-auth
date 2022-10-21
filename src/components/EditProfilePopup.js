@@ -46,9 +46,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setIsValid(true);
   }, [currentUser, isOpen])
 
-  // сделала ниже условие для отрисовки, иначе, когда данные еще не приходят, 
-  // консоль выдает ошибку, что управляемые компоненты переходят в неуправляемые, 
-  // когда значения currentUser undefined
   if (Object.keys(currentUser).length > 0) {
     return (
       <PopupWithForm 
@@ -59,9 +56,31 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         onSubmit={handleSubmit}
         isValid={isValid}
       >
-        <input type="text" onChange={handleChange} value={values.name} id="name-input" name="name" className={`popup__field popup__field_type_name ${(errors.name?.length > 1) ? 'popup__field_type_error' : ''}`} placeholder="Имя" minLength="2" maxLength="40" required />
+        <input
+          type="text"
+          onChange={handleChange}
+          value={values.name}
+          id="name-input"
+          name="name"
+          className={`popup__field popup__field_type_name ${(errors.name?.length > 1) ? 'popup__field_type_error' : ''}`}
+          placeholder="Имя"
+          minLength="2"
+          maxLength="40"
+          required
+        />
         <span className={`popup__field-error name-input-error ${(errors.name?.length > 1) ? 'popup__field-error_active' : ''}`}>{errors.name}</span>
-        <input type="text" onChange={handleChange} value={values.description} id="description-input" name="description" className={`popup__field popup__field_type_description ${(errors.description?.length > 1) ? 'popup__field_type_error' : ''}`} placeholder="О себе" minLength="2" maxLength="200" required />
+        <input
+          type="text"
+          onChange={handleChange}
+          value={values.description}
+          id="description-input"
+          name="description"
+          className={`popup__field popup__field_type_description ${(errors.description?.length > 1) ? 'popup__field_type_error' : ''}`}
+          placeholder="О себе"
+          minLength="2"
+          maxLength="200"
+          required
+        />
         <span className={`popup__field-error description-input-error ${(errors.description?.length > 1) ? 'popup__field-error_active' : ''} `}>{errors.description}</span>
       </PopupWithForm>
     )

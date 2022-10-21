@@ -25,7 +25,8 @@ function Header({ loggedIn, handleComeOut, email }) {
     {loggedIn && (
       <div className={`header__container_type_hidden ${openHeaderContainer ? 'header__container_type_open' : ''}`}>
         <p className="header__email">{email}</p>
-        <NavLink onClick={onSignOut} to="/sign-in" className="header__link header__link_type_gate button-link-opacity">Выйти</NavLink>
+        <NavLink
+          onClick={onSignOut} to="/sign-in" className="header__link header__link_type_gate button-link-opacity">Выйти</NavLink>
       </div>
     )}
     <div className="header__visible-part">

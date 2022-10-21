@@ -30,7 +30,11 @@ function Login({ handleLogin, setEmail }) {
     <section className="authentication" aria-label="Вход в личный кабинет">
       <div className="authentication__container">
         <h2 className='authentication__heading'>Вход</h2>
-        <AuthenticationWithForm handleSubmit={handleSubmit} onClick={handleClick} saveButton={saveButton} />
+        <AuthenticationWithForm 
+          handleSubmit={handleSubmit}
+          onClick={handleClick}
+          saveButton={saveButton}
+        />
       </div>
     </section>
   )

@@ -30,6 +30,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   useEffect(() => {
     if (isSubmitted) {
       avatarRef.current.value = null;
+      setIsValid(false);
     }
     return (
       setIsSubmitted(false)
@@ -45,7 +46,16 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       onSubmit={handleSubmit}
       isValid={isValid}
     >
-      <input ref={avatarRef} onChange ={handleChange} type="url" id="link-input" name="link" className={`popup__field popup__field_type_link-img ${(errors.link?.length > 1) ? 'popup__field_type_error' : ''}`} placeholder="Ссылка на аватар" required />
+      <input 
+        ref={avatarRef}
+        onChange ={handleChange}
+        type="url"
+        id="link-input"
+        name="link"
+        className={`popup__field popup__field_type_link-img ${(errors.link?.length > 1) ? 'popup__field_type_error' : ''}`}
+        placeholder="Ссылка на аватар"
+        required
+        />
       <span className={`popup__field-error link-input-error ${(errors.link?.length > 1) ? 'popup__field-error_active' : ''}`}>{errors.link}</span>
     </PopupWithForm>
   )
