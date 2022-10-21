@@ -6,11 +6,6 @@ import { authorization } from '../utils/authorization';
 function Login({ handleLogin, setEmail }) {
   const [saveButton, setSaveButton] = useState('Войти');
   const history = useHistory();
-  
-  // function handleClick() {
-  //   setSaveButton('Подождите...');
-  //   setTimeout(setSaveButton, 1500, 'Войти');
-  // }
 
   function handleSubmit(event, email, password) {
     event.preventDefault();

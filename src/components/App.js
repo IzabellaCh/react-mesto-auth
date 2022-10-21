@@ -30,6 +30,7 @@ function App() {
   const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
+  const [cardDelete, setCardDelete] = useState(null);
 
   function handleEditAvatarClick() {
     setIsEditAvatarOpen(true);
@@ -62,6 +63,7 @@ function App() {
     setSelectedCard(null);
     setIsSuccessOpen(false);
     setIsFailOpen(false);
+    setCardDelete(null);
   }
 
   function handleUpdateUser(newInfo, changeButton){
@@ -105,14 +107,16 @@ function App() {
       })
   }
 
-  function handleCardDelete(card) {
-    api.deleteCard(card._id)
+  function handleCardDelete(event) {
+    event.preventDefault();
+    api.deleteCard(cardDelete._id)
       .then(() => {
-        setCards((state) => state.filter(el => el._id !== card._id));
+        setCards((state) => state.filter(el => el._id !== cardDelete._id));
       })
       .catch((err) => {
         alert(`Ошибка при удалении карточки: ${err}`);
-      })
+      });
+    closeAllPopups();
   }
 
   function handleAddPlaceSubmit(newCardInfo, setIsSubmitted, changeButton) {
@@ -197,8 +201,10 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
+          // onCardDelete={handleCardDelete}
           cards={cards}
+
+          onCardDelete={setCardDelete}
         />
         <Route path="/sign-up">
           <Register openSuccess={handleOpenSuccess} openFail={handleOpenFail} />
@@ -229,6 +235,11 @@ function App() {
       <PopupWithForm
         name="delete-card"
         title="Вы уверены?"
+        isOpen={cardDelete}
+        onClose={closeAllPopups}
+        onSubmit={handleCardDelete}
+        isValid={true}
+        saveButton={'Да'}
       />
       <InfoTooltip
         name="success"

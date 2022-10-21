@@ -3,7 +3,6 @@ import { Link, withRouter, useHistory } from 'react-router-dom';
 import AuthenticationWithForm from './AuthenticationWithForm';
 import { authorization } from '../utils/authorization';
 
-
 function Register({ openSuccess, openFail }) {
   const [saveButton, setSaveButton] = useState('Зарегистрироваться');
   const history = useHistory();
