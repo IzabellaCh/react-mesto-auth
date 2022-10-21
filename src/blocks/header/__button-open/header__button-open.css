@@ -3,9 +3,10 @@
   padding: 6px 0 0;
   width: 24px;
   height: 24px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 6px;
+  background-color: transparent;
+  background-image: url(../../../images/open-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
 }
 

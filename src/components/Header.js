@@ -43,11 +43,7 @@ function Header({ loggedIn, handleComeOut, email }) {
           <p className="header__email">{email}</p>
           <NavLink onClick={onSignOut} to="/sign-in" className="header__link header__link_type_gate button-link-opacity">Выйти</NavLink>
         </div>
-        <div onClick={handleOpenContainer} className={`header__button-open button-link-opacity ${openHeaderContainer ? 'header__button-open_type_hidden' : ''}`}>
-          <div className="header__line"></div>
-          <div className="header__line"></div>
-          <div className="header__line"></div>
-        </div>
+        <button onClick={handleOpenContainer} className={`header__button-open button-link-opacity ${openHeaderContainer ? 'header__button-open_type_hidden' : ''}`}></button>
         <button onClick={handleHideContainer} className={`header__button-close button-link-opacity ${openHeaderContainer ? '' : 'header__button-close_type_hidden'} button`}></button>
       </>
       )}

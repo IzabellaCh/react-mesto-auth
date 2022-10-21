@@ -10,6 +10,7 @@ function Register({ openSuccess, openFail }) {
 
   function handleSubmit(event, email, password) {
     event.preventDefault();
+    setSaveButton('Регистрация...');
     authorization.register(email, password)
     .then((res) => {
       console.log(res);
@@ -22,11 +23,9 @@ function Register({ openSuccess, openFail }) {
       openFail();
       console.log(`Ошибка при регистрации: ${err}`);
     })
-  }
-
-  function handleClick() {
-    setSaveButton('Регистрация...');
-    setTimeout(setSaveButton, 1500, 'Зарегистрироваться')
+    .finally(() => {
+      setSaveButton('Зарегистрироваться');
+    })
   }
 
   return (
@@ -34,7 +33,6 @@ function Register({ openSuccess, openFail }) {
       <h2 className='authentication__heading'>Регистрация</h2>
       <AuthenticationWithForm
         handleSubmit={handleSubmit}
-        onClick={handleClick}
         saveButton={saveButton}
       />
       <p className='authentication__subtitle'>Уже зарегистрированы? <Link to="/sign-in" className="authentication__subtitle authentication__subtitle_type_link button-link-opacity">Войти</Link></p>

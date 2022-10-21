@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function AuthenticationWithForm({ handleSubmit, onClick, saveButton }) {
+function AuthenticationWithForm({ handleSubmit, saveButton }) {
   const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -71,7 +71,6 @@ function AuthenticationWithForm({ handleSubmit, onClick, saveButton }) {
       <button 
         type="submit"
         disabled={!isValid}
-        onClick={onClick}
         className={`authentication__save-button save-button ${isValid ? '' : 'authentication__save-button_disabled'}`}
       >
         {saveButton}

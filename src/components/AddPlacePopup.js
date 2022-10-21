@@ -6,6 +6,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [saveButton, setSaveButton] = useState('Сохранить');
 
   function handleChange(event) {
     const { name, value, validationMessage } = event.target;
@@ -29,10 +30,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setSaveButton('Сохранение...');
     onAddPlace({
       name: values.placename,
       link: values.link
-    }, setIsSubmitted)
+    }, setIsSubmitted, setSaveButton);
   }
 
   useEffect(() => {
@@ -56,6 +58,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      saveButton={saveButton}
     >
       <input
         type="text"

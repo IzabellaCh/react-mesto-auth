@@ -6,6 +6,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [saveButton, setSaveButton] = useState('Сохранить');
 
   function handleChange(event) {
     const { name, validationMessage } = event.target;
@@ -24,7 +25,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdateAvatar(avatarRef.current.value, setIsSubmitted);
+    setSaveButton('Сохранение...');
+    onUpdateAvatar(avatarRef.current.value, setIsSubmitted, setSaveButton);
   }
 
   useEffect(() => {
@@ -45,6 +47,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      saveButton={saveButton}
     >
       <input 
         ref={avatarRef}

@@ -7,13 +7,14 @@ function Login({ handleLogin, setEmail }) {
   const [saveButton, setSaveButton] = useState('Войти');
   const history = useHistory();
   
-  function handleClick() {
-    setSaveButton('Подождите...');
-    setTimeout(setSaveButton, 1500, 'Войти');
-  }
+  // function handleClick() {
+  //   setSaveButton('Подождите...');
+  //   setTimeout(setSaveButton, 1500, 'Войти');
+  // }
 
   function handleSubmit(event, email, password) {
     event.preventDefault();
+    setSaveButton('Подождите...');
     authorization.login(email, password)
       .then((data) => {
         localStorage.setItem('token', data.token);
@@ -23,7 +24,10 @@ function Login({ handleLogin, setEmail }) {
       })
       .catch((err) => {
         console.log(`Ошибка при авторизации: ${err}`);
-    })
+      })
+      .finally(()=> {
+        setSaveButton('Войти');
+      })
   }
 
   return (
@@ -32,7 +36,7 @@ function Login({ handleLogin, setEmail }) {
         <h2 className='authentication__heading'>Вход</h2>
         <AuthenticationWithForm 
           handleSubmit={handleSubmit}
-          onClick={handleClick}
+          // onClick={handleClick}
           saveButton={saveButton}
         />
       </div>

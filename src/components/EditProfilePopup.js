@@ -7,6 +7,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [saveButton, setSaveButton] = useState('Сохранить');
   
   function handleChange(event) {
     const { name, value, validationMessage } = event.target;
@@ -30,11 +31,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    
+    setSaveButton('Сохранение...');
     onUpdateUser({
       name: values.name,
       about: values.description,
-    });
+    }, setSaveButton);
   }
   
   useEffect(() => {
@@ -55,6 +56,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         onClose={onClose}
         onSubmit={handleSubmit}
         isValid={isValid}
+        saveButton={saveButton}
       >
         <input
           type="text"

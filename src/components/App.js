@@ -64,7 +64,7 @@ function App() {
     setIsFailOpen(false);
   }
 
-  function handleUpdateUser(newInfo){
+  function handleUpdateUser(newInfo, changeButton){
     api.changeUserInfo(newInfo)
       .then((data) => {
         setCurrenUser(data);
@@ -72,17 +72,21 @@ function App() {
       })
       .catch((err) => {
         alert(`Ошибка при обновлнии данных пользователя: ${err}`);
-      });
+      })
+      .finally(() => {
+        changeButton('Сохранить')
+      })
   }
 
-  function handleUpdateAvatar(avatarLink, setIsSubmitted) {
+  function handleUpdateAvatar(avatarLink, setIsSubmitted, changeButton) {
     api.changeAvatar(avatarLink)
       .then((data) => {
         setCurrenUser(data);
         closeAllPopups();
       })
       .then(() => {
-        setIsSubmitted(true)
+        setIsSubmitted(true);
+        changeButton('Сохранить');
       })
       .catch((err) => {
         alert(`Ошибка при смене аватара: ${err}`);
@@ -111,14 +115,15 @@ function App() {
       })
   }
 
-  function handleAddPlaceSubmit(newCardInfo, setIsSubmitted) {
+  function handleAddPlaceSubmit(newCardInfo, setIsSubmitted, changeButton) {
     api.createNewCard(newCardInfo)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups()
       })
       .then(() => {
-        setIsSubmitted(true)
+        setIsSubmitted(true);
+        changeButton('Сохранить')
       })
       .catch((err) => {
         alert(`Ошибка при создании новой карточки: ${err}`);
@@ -151,7 +156,8 @@ function App() {
   }
 
   useEffect(() => {
-    api.getInitialCards()
+    if (loggedIn === true) {
+      api.getInitialCards()
       .then((data) => {
         setCards(data)
       })
@@ -166,10 +172,12 @@ function App() {
       .catch((err) => {
         alert(`Ошибка при загрузке информации профиля: ${err}`);
       });
-    
-      checkToken();
-  }, [])
+    }
+  }, [loggedIn])
 
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   return (
   <div className="page">
