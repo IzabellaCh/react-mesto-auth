@@ -160,22 +160,22 @@ function App() {
   }
 
   useEffect(() => {
-    if (loggedIn === true) {
+    if (loggedIn) {
       api.getInitialCards()
-      .then((data) => {
-        setCards(data)
-      })
-      .catch((err)=> {
-        alert(`Ошибка при загрузке массива карточек: ${err}`)
-      });
+        .then((data) => {
+          setCards(data)
+        })
+        .catch((err)=> {
+          alert(`Ошибка при загрузке массива карточек: ${err}`)
+        });
 
-    api.getServerUserInfo()
-      .then((data) => {
-        setCurrenUser(data);
-      })
-      .catch((err) => {
-        alert(`Ошибка при загрузке информации профиля: ${err}`);
-      });
+      api.getServerUserInfo()
+        .then((data) => {
+          setCurrenUser(data);
+        })
+        .catch((err) => {
+          alert(`Ошибка при загрузке информации профиля: ${err}`);
+        });
     }
   }, [loggedIn])
 
